@@ -51,6 +51,8 @@
                 </label>
                 <div class="col-sm-9">
                     <input  type="number"
+                            customMin
+                            [minimo]="0"
                             name="existencias"
                             ngModel
                             class="form-control"
@@ -85,4 +87,6 @@
     <span>value</span>
     <pre>{{miFormulario.value | json}}</pre>
 
+    <span>Custom directives</span>
+    <pre>{{miFormulario.controls.existencias?.errors | json}}</pre>
 </div>
