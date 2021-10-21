@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder, FormArray } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder, FormArray, FormControl, Validator } from '@angular/forms';
 
 @Component({
   selector: 'app-dinamicos',
@@ -17,7 +17,9 @@ export class DinamicosComponent {
       ['Dying ligth',Validators.required],
       ['Cyberpunk 2077',Validators.required]
     ], Validators.required )
-  })
+  });
+
+  public nuevoFavorito: FormControl = this.fb.control('',Validators.required);
 
   constructor(private fb:FormBuilder) { }
 
@@ -41,12 +43,18 @@ export class DinamicosComponent {
     this.miFormulario.reset();
   }
 
-  agregarJuego(){
-    
+  agregarFavorito(){
+    if(this.nuevoFavorito.invalid){
+      return ;
+    }
+
+    //this.favoritosArr.push( new FormControl( this.nuevoFavorito.value, Validators.required));
+    this.favoritosArr.push( this.fb.control(this.nuevoFavorito.value , Validators.required));
+    this.nuevoFavorito.reset();
   }
 
   eliminar(index :number){
-    
+    this.favoritosArr.removeAt(index);
   }
 
 
