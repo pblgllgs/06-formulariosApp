@@ -15,6 +15,12 @@ const routes: Routes = [
     canActivate : []
   },
   {
+    path: 'auth',
+    loadChildren:() => import('./auth/auth.module').then( m => m.AuthModule),
+    canLoad:[  ],
+    canActivate : []
+  },
+  {
     path: '**',
     redirectTo: 'template'
   }
